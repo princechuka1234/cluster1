@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cluster 1</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <script src="../static/script.js" defer></script>
+</head>
+
+<body>
+    <div id="toast-notification" class="toast-notification"></div>
+    <header>
+        <nav>
+            <div class="logo"><span class="logo-icon" aria-label="burger">🍔</span><span class="logo-text">CLUSTER
+                    1</span></div>
+
+            <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <div class="cart-container">
+                <a href="#" class="cart-icon" aria-label="Shopping Cart">
+                    🛒
+                    <span id="cart-count" class="cart-count">0</span>
+                </a>
+                <!-- Cart Modal (hidden by default) -->
+                <div id="cart-modal" class="cart-modal hidden" aria-hidden="true">
+                    <div class="cart-modal-content">
+                        <div class="cart-modal-header">
+                            <h3>Your Cart</h3>
+                            <button id="cart-close" class="cart-close" aria-label="Close cart">✕</button>
+                        </div>
+                        <div id="cart-items" class="cart-items">
+                            <!-- Items will be rendered here by JS -->
+                        </div>
+                        <div class="cart-modal-footer">
+                            <div class="cart-subtotal">Subtotal: <span id="cart-subtotal">$0.00</span></div>
+                            <div class="cart-actions">
+                                <button id="clear-cart" class="btn-muted">Clear</button>
+                                <a href="payment.html" id="checkout-btn" class="btn-primary">Review & Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="sign.html">Sign In</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="loader-wrapper">
+            <div class="loader"></div>
+        </div>
+        <section class="hero-section" id="hero-section">
+            <div class="hero-overlay"
+                style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));">
+                <div class="hero-content">
+                    <h1>SAVOR THE BEST BITES AT CLUSTER 1</h1>
+                    <p>Delicious burgers, fresh flavors, and unforgettable moments. Order now and treat yourself!</p>
+                    <div class="hero-btns">
+                        <a href="sign.html" class="get-started-btn">Get Started</a>
+                        <a href="payment.html" class="buy-now">Order Now</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features">
+            <h2>Why Choose Cluster 1?</h2>
+            <div class="features-row">
+                <div class="feature-card">
+                    <span class="feature-icon" aria-label="menu">🍔</span>
+                    <h3>Delicious Variety</h3>
+                    <p>Wide range of mouth-watering burgers and meals for every taste.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon" aria-label="fast">⚡</span>
+                    <h3>Fast Service</h3>
+                    <p>Quick and friendly service so you never have to wait long.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon" aria-label="support">💬</span>
+                    <h3>24/7 Support</h3>
+                    <p>Always here to help with your orders and questions.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon" aria-label="discount">🎉</span>
+                    <h3>Exclusive Deals</h3>
+                    <p>Enjoy special offers and discounts for our loyal customers.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="categories" class="top-categories">
+            <h2>Our Tasty Categories</h2>
+            <div class="categories-row">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80"
+                        alt="Burgers">
+                    <div class="product-info">
+                        <p class="name">Classic Burgers</p>
+                        <p class="price">From $7</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+                        alt="Pizza">
+                    <div class="product-info">
+                        <p class="name">Gourmet Pizza</p>
+                        <p class="price">From $12</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1600346232445-845da1a4c716?auto=format&fit=crop&w=400&q=80"
+                        alt="Tacos">
+                    <div class="product-info">
+                        <p class="name">Street Tacos</p>
+                        <p class="price">From $4</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80"
+                        alt="Shakes">
+                    <div class="product-info">
+                        <p class="name">Creamy Shakes</p>
+                        <p class="price">From $6</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80"
+                        alt="Desserts">
+                    <div class="product-info">
+                        <p class="name">Decadent Desserts</p>
+                        <p class="price">From $5</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="more-categories-container">
+                <a href="categories.html" class="more-categories-btn">Explore Full Menu</a>
+            </div>
+        </section>
+
+        <section id="testimonials">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonials-row">
+                <blockquote>
+                    <img class="testimonial-avatar" src="https://randomuser.me/api/portraits/women/44.jpg"
+                        alt="Jane D.">
+                    Amazing service and fast delivery!
+                    <span>- Jane D.</span>
+                </blockquote>
+                <blockquote>
+                    <img class="testimonial-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike S.">
+                    Great selection and easy checkout process.
+                    <span>- Mike S.</span>
+                </blockquote>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Full Name" required>
+                <input type="email" placeholder="Email Address" required>
+                <input type="tel" placeholder="Phone (optional)">
+                <textarea placeholder="How can we help you?" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="logo-icon" aria-label="burger">🍔</span>
+                <span class="logo-text">CLUSTER 1</span>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#features">Features</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: support@cluster1.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Food Street, Flavor Town</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="Instagram">📸</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Cluster 1. All rights reserved.</p>
+            <p>Order online and pick up in-store or get delivery to your door.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

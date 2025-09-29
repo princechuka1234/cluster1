@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Categories - Cluster 1</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <div id="toast-notification" class="toast-notification"></div>
+    <header>
+        <nav>
+            <div class="logo"><span class="logo-icon">🍔</span><span class="logo-text">CLUSTER 1</span></div>
+            <div class="cart-container">
+                <a href="#" class="cart-icon" aria-label="Shopping Cart">
+                    🛒
+                    <span id="cart-count" class="cart-count">0</span>
+                </a>
+            </div>
+            <!-- Cart Modal (hidden by default) -->
+            <div id="cart-modal" class="cart-modal hidden" aria-hidden="true">
+                <div class="cart-modal-content">
+                    <div class="cart-modal-header">
+                        <h3>Your Cart</h3>
+                        <button id="cart-close" class="cart-close" aria-label="Close cart">✕</button>
+                    </div>
+                    <div id="cart-items" class="cart-items"></div>
+                    <div class="cart-modal-footer">
+                        <div class="cart-subtotal">Subtotal: <span id="cart-subtotal">$0.00</span></div>
+                        <div class="cart-actions">
+                            <button id="clear-cart" class="btn-muted">Clear</button>
+                            <a href="payment.html" id="checkout-btn" class="btn-primary">Review & Checkout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="categories.html">Categories</a></li>
+                <li><a href="sign.html">Sign In</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero-section"
+            style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1480&q=80'); min-height: 50vh;">
+            <div class="hero-overlay"
+                style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)); min-height: 50vh;">
+                <div class="hero-content">
+                    <h1>Our Full Menu</h1>
+                    <p>Explore our wide range of delicious offerings.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="category-section">
+            <h2 class="category-title">Burgers</h2>
+            <div class="categories-row">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=400&q=80"
+                        alt="Classic Beef">
+                    <div class="product-info">
+                        <p class="name">Classic Beef</p>
+                        <p class="price">$9.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=400&q=80"
+                        alt="Bacon Deluxe">
+                    <div class="product-info">
+                        <p class="name">Bacon Deluxe</p>
+                        <p class="price">$11.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1603614584236-b8673d5c3513?auto=format&fit=crop&w=400&q=80"
+                        alt="Veggie Burger">
+                    <div class="product-info">
+                        <p class="name">Veggie Burger</p>
+                        <p class="price">$8.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">Pizzas</h2>
+            <div class="categories-row">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=400&q=80"
+                        alt="Pepperoni">
+                    <div class="product-info">
+                        <p class="name">Pepperoni</p>
+                        <p class="price">$14.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=400&q=80"
+                        alt="Margherita">
+                    <div class="product-info">
+                        <p class="name">Margherita</p>
+                        <p class="price">$12.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=400&q=80"
+                        alt="BBQ Chicken">
+                    <div class="product-info">
+                        <p class="name">BBQ Chicken</p>
+                        <p class="price">$15.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">Tacos</h2>
+            <div class="categories-row">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1565299585323-21d1d336795e?auto=format&fit=crop&w=400&q=80"
+                        alt="Carne Asada">
+                    <div class="product-info">
+                        <p class="name">Carne Asada</p>
+                        <p class="price">$3.50</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=400&q=80"
+                        alt="Al Pastor">
+                    <div class="product-info">
+                        <p class="name">Al Pastor</p>
+                        <p class="price">$3.50</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1627907222043-9c11d1d82c1c?auto=format&fit=crop&w=400&q=80"
+                        alt="Fish Tacos">
+                    <div class="product-info">
+                        <p class="name">Fish Tacos</p>
+                        <p class="price">$4.00</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="category-section">
+            <h2 class="category-title">Desserts</h2>
+            <div class="categories-row">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?auto=format&fit=crop&w=400&q=80"
+                        alt="Cheesecake">
+                    <div class="product-info">
+                        <p class="name">Cheesecake</p>
+                        <p class="price">$6.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1551024601-bec78d8d590d?auto=format&fit=crop&w=400&q=80"
+                        alt="Milkshake">
+                    <div class="product-info">
+                        <p class="name">Milkshake</p>
+                        <p class="price">$5.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=400&q=80"
+                        alt="Cupcake">
+                    <div class="product-info">
+                        <p class="name">Cupcake</p>
+                        <p class="price">$3.99</p>
+                        <button class="add-to-cart">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="logo-icon" aria-label="burger">🍔</span>
+                <span class="logo-text">CLUSTER 1</span>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <a href="#">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#features">Features</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Us</h4>
+                <p>Email: support@cluster1.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Food Street, Flavor Town</p>
+            </div>
+            <div class="footer-social">
+                <h4>Follow Us</h4>
+                <a href="#" aria-label="Facebook">📘</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="Instagram">📸</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Cluster 1. All rights reserved.</p>
+            <p>Order online and pick up in-store or get delivery to your door.</p>
+        </div>
+    </footer>
+    <script src="../static/script.js" defer></script>
+</body>
+
+</html>

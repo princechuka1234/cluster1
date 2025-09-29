@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Cluster 1</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-form-wrapper">
+            <div class="auth-header">
+                <a href="home.html" class="logo-link">
+                    <span class="logo-icon" aria-label="burger">🍔</span>
+                    <span class="logo-text">CLUSTER 1</span>
+                </a>
+                <h2>Complete Your Order</h2>
+                <p>Enter your payment details below.</p>
+            </div>
+            <form action="#" method="POST" class="auth-form">
+                <div class="form-group">
+                    <label for="name">Cardholder Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry-date">Expiry Date</label>
+                        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" required>
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn">Pay Now</button>
+            </form>
+            <div class="auth-footer">
+                <a href="home.html">Back to Site</a>
+            </div>
+        </div>
+    </div>
+    <script src="../static/script.js" defer></script>
+</body>
+</html>
