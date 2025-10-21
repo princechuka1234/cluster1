@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+{% block content %}
+<header>
+    
+    <nav>
+        <div class="logo"><span class="logo-icon" aria-label="burger">🍔</span><span class="logo-text">CLUSTER
+                1</span></div>
+
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-links">
+            <li>
+                    {% if current_user.is_authenticated %}
+                    <button class="btn btn-link nav-link p-0 text-decoration-none" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas"
+                        onclick="loadCartData()">
+                        🛒
+                        <span id="cart-nav-count" class="cart-count">
+                            {{ cart_c }}
+                        </span>
+                    </button>
+                    {% else %}
+                    <a href="{{ url_for('login') }}">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </a>
+                    {% endif %}
+                </li>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('categories') }}">Categories</a></li>
+            
+            {% if current_user.is_authenticated and user and (user.s_admin or user.is_admin) %}
+            <li><a href="{{ url_for('admin_dashboard') }}" class="btn btn-dark">Admin Dashboard</a></li>
+            {% endif %}
+
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('logout') }}">Sign Out</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Sign In</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main>
+    <section class="hero-section"
+        style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1480&q=80'); min-height: 50vh;">
+        <div class="hero-overlay"
+            style=" padding-top:12%; background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)); min-height: 50vh;">
+            <div class="hero-content">
+                <h1>Our Full Menu</h1>
+                <p>Explore our wide range of delicious offerings.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="category-section" style="padding-top:12%;">
+        <h2 class="category-title">Burgers</h2>
+        <div class="categories-row">
+            {% for p in burger %}
+            <div class="product-card">
+                <img src="{{ p.image }}" alt="Burgers">
+                <div class="product-info">
+                    <p class="name">{{ p.name }}</p>
+                    <p class="price">From ${{ p.price }}</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="{{ p.name }}" required>
+                        <input type="hidden" step="0.01" name="price" value="{{ p.price }}" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            No burger available
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-section">
+        <h2 class="category-title">Pizzas</h2>
+        <div class="categories-row">
+            {% for p in pizza %}
+            <div class="product-card">
+                <img src="{{ p.image }}" alt="Burgers">
+                <div class="product-info">
+                    <p class="name">{{ p.name }}</p>
+                    <p class="price">From ${{ p.price }}</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="{{ p.name }}" required>
+                        <input type="hidden" step="0.01" name="price" value="{{ p.price }}" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            No burger available
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-section">
+        <h2 class="category-title">Tacos</h2>
+        <div class="categories-row">
+            {% for p in taco %}
+            <div class="product-card">
+                <img src="{{ p.image }}" alt="Burgers">
+                <div class="product-info">
+                    <p class="name">{{ p.name }}</p>
+                    <p class="price">From ${{ p.price }}</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="{{ p.name }}" required>
+                        <input type="hidden" step="0.01" name="price" value="{{ p.price }}" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            No taco available
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="category-section">
+        <h2 class="category-title">Desserts</h2>
+        <div class="categories-row">
+            {% for p in dessert %}
+            <div class="product-card">
+                <img src="{{ p.image }}" alt="Burgers">
+                <div class="product-info">
+                    <p class="name">{{ p.name }}</p>
+                    <p class="price">From ${{ p.price }}</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="{{ p.name }}" required>
+                        <input type="hidden" step="0.01" name="price" value="{{ p.price }}" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            No dessert available
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content small-box">
+            <span class="close">&times;</span>
+            <h2>Your Cart</h2>
+            {% if items %}
+            <table class="table table-striped" border="1" cellpadding="8">
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.product_name }}</td>
+                    <td>${{ "%.2f"|format(item.price) }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ "%.2f"|format(item.price * item.quantity) }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('remove_item', item_id=item.id) }}">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="text-end mt-3">
+                <h4>Total: ${{ "%.2f"|format(carts.total_cost()) }}</h4>
+            </div>
+            <form action="{{ url_for('pay') }}" method="POST">
+                <button type="submit" class="btn btn-success">Pay</button>
+            </form>
+            {% else %}
+            <p>Your cart is empty.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff3e0;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #ff9800;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .small-box {
+            width: 50%;
+            /* Smaller box size */
+            max-width: 400px;
+        }
+
+        .close {
+            color: #ff9800;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #e65100;
+            text-decoration: none;
+        }
+
+        .btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #e65100;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-success {
+            background-color: #4CAF50;
+        }
+
+        .btn-success:hover {
+            background-color: #388E3C;
+        }
+        .category-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ff9800;
+    margin-bottom: 8px;
+    text-align: center;
+}
+    </style>
+
+    <!-- Modal Script -->
+    <script>
+        var cartModal = document.getElementById("cartModal");
+        var openCartButtons = document.querySelectorAll(".open-cart-modal");
+        var closeCart = document.getElementsByClassName("close")[0];
+
+        openCartButtons.forEach(function (button) {
+            button.onclick = function () {
+                cartModal.style.display = "block";
+            };
+        });
+
+        closeCart.onclick = function () {
+            cartModal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if (event.target == cartModal) {
+                cartModal.style.display = "none";
+            }
+        };
+    </script>
+</main>
+{% endblock %}

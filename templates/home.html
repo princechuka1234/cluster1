@@ -1,0 +1,349 @@
+{% extends "base.html" %}
+{% block content %}
+<header>
+    <nav>
+        <div class="logo"><span class="logo-icon" aria-label="burger">🍔</span><span class="logo-text">CLUSTER
+                1</span></div>
+
+        <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <ul class="nav-links">
+            <li>
+                    {% if current_user.is_authenticated %}
+                    <button class="btn btn-link nav-link p-0 text-decoration-none" type="button"
+                        data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas" aria-controls="cartOffcanvas"
+                        onclick="loadCartData()">
+                        🛒
+                        <span id="cart-nav-count" class="cart-count">
+                            {{ cart_c }}
+                        </span>
+                    </button>
+                    {% else %}
+                    <a href="{{ url_for('login') }}">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </a>
+                    {% endif %}
+                </li>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('categories') }}">Categories</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+
+            {% if current_user.is_authenticated and user and (user.s_admin or user.is_admin) %}
+            <li><a href="{{ url_for('admin_dashboard') }}" class="btn btn-dark">Admin Dashboard</a></li>
+            {% endif %}
+
+            {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('logout') }}">Sign Out</a></li>
+            {% else %}
+            <li><a href="{{ url_for('login') }}">Sign In</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+<main>
+
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
+    <section class="hero-section" id="hero-section">
+        <div class="hero-overlay"
+            style="background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));">
+            <div class="hero-content">
+                {% if current_user.is_authenticated %}
+                <h2 style="color: white;font-size: 1vw;text-align: left;margin-top: -2rem;">Welcome {{ username }}</h2>
+                <br>
+                {% else %}
+                <h2></h2>
+                {% endif %}
+                <h1>SAVOR THE BEST BITES AT CLUSTER 1</h1>
+                <p>Delicious burgers, fresh flavors, and unforgettable moments. Order now and treat yourself!</p>
+                <div class="hero-btns">
+                    {% if current_user.is_authenticated %}
+
+                    {% else %}
+                    <a href="{{ url_for('login') }}" class="get-started-btn">Get Started</a>
+                    {% endif %}
+
+                    <a href="{{ url_for('categories') }}" class="buy-now">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="features">
+        <h2>Why Choose Cluster 1?</h2>
+        <div class="features-row">
+            <div class="feature-card">
+                <span class="feature-icon" aria-label="menu">🍔</span>
+                <h3>Delicious Variety</h3>
+                <p>Wide range of mouth-watering burgers and meals for every taste.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon" aria-label="fast">⚡</span>
+                <h3>Fast Service</h3>
+                <p>Quick and friendly service so you never have to wait long.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon" aria-label="support">💬</span>
+                <h3>24/7 Support</h3>
+                <p>Always here to help with your orders and questions.</p>
+            </div>
+            <div class="feature-card">
+                <span class="feature-icon" aria-label="discount">🎉</span>
+                <h3>Exclusive Deals</h3>
+                <p>Enjoy special offers and discounts for our loyal customers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="categories" class="top-categories">
+        <h2>Our Tasty Categories</h2>
+        <div class="categories-row">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=400&q=80"
+                    alt="Burgers">
+                <div class="product-info">
+                    <p class="name">Classic Burgers</p>
+                    <p class="price">From $7</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="Classic Burgers" required>
+                        <input type="hidden" step="0.01" name="price" value="7" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80"
+                    alt="Pizza">
+                <div class="product-info">
+                    <p class="name">Gourmet Pizza</p>
+                    <p class="price">From $12</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="Gourmet Pizza" required>
+                        <input type="hidden" step="0.01" name="price" value="12" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://whisperofyum.com/wp-content/uploads/2024/05/whisper-of-yum-Carne-asada-tacos.jpg"
+                    alt="Tacos">
+                <div class="product-info">
+                    <p class="name">Street Tacos</p>
+                    <p class="price">From $4</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="Street Tacos" required>
+                        <input type="hidden" step="0.01" name="price" value="4" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://www.dessertfortwo.com/wp-content/uploads/2022/08/How-to-Make-a-Milkshake-11.jpg"
+                    alt="Shakes">
+                <div class="product-info">
+                    <p class="name">Creamy Shakes</p>
+                    <p class="price">From $6</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="Creamy Shakes" required>
+                        <input type="hidden" step="0.01" name="price" value="6" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+
+                </div>
+            </div>
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80"
+                    alt="Desserts">
+                <div class="product-info">
+                    <p class="name">Decadent Desserts</p>
+                    <p class="price">From $5</p>
+                    <form method="POST" action="{{ url_for('add_to_cart') }}">
+                        <input type="hidden" name="product_name" value="Decadent Desserts" required>
+                        <input type="hidden" step="0.01" name="price" value="5" required>
+                        <input type="hidden" name="quantity" value="1" min="1" required>
+                        <button class="add" type="submit">Add to Cart</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <div class="more-categories-container">
+        <a href="{{ url_for('categories') }}" class="more-categories-btn">Explore Full Menu</a>
+    </div>
+    <section id="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonials-row">
+            <blockquote>
+                <img class="testimonial-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane D.">
+                Amazing service and fast delivery!
+                <span>- Jane D.</span>
+            </blockquote>
+            <blockquote>
+                <img class="testimonial-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Mike S.">
+                Great selection and easy checkout process.
+                <span>- Mike S.</span>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content small-box">
+            <span class="close">&times;</span>
+            <h2>Your Cart</h2>
+            {% if items %}
+            <table class="table table-striped" border="1" cellpadding="8">
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.product_name }}</td>
+                    <td>${{ "%.2f"|format(item.price) }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>${{ "%.2f"|format(item.price * item.quantity) }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('remove_item', item_id=item.id) }}">
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="text-end mt-3">
+                <h4>Total: ${{ "%.2f"|format(carts.total_cost()) }}</h4>
+            </div>
+            <form action="{{ url_for('pay') }}" method="POST">
+                <button type="submit" class="btn btn-success">Pay</button>
+            </form>
+            {% else %}
+            <p>Your cart is empty.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Modal Styles -->
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff3e0;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #ff9800;
+            width: 80%;
+            max-width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .small-box {
+            width: 50%;
+            /* Smaller box size */
+            max-width: 400px;
+        }
+
+        .close {
+            color: #ff9800;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #e65100;
+            text-decoration: none;
+        }
+
+        .btn {
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #e65100;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+        .btn-success {
+            background-color: #4CAF50;
+        }
+
+        .btn-success:hover {
+            background-color: #388E3C;
+        }
+    </style>
+
+    <!-- Modal Script -->
+    <script>
+        var cartModal = document.getElementById("cartModal");
+        var openCartButtons = document.querySelectorAll(".open-cart-modal");
+        var closeCart = document.getElementsByClassName("close")[0];
+
+        openCartButtons.forEach(function (button) {
+            button.onclick = function () {
+                cartModal.style.display = "block";
+            };
+        });
+
+        closeCart.onclick = function () {
+            cartModal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if (event.target == cartModal) {
+                cartModal.style.display = "none";
+            }
+        };
+    </script>
+</main>
+
+{% endblock %}

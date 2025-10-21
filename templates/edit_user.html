@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h3 class="mb-4">Edit User Information (ID: {{ users.id }})</h3>
+            <form method="POST" class="bg-light p-4 rounded shadow-sm">
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ users.phone }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="{{ users.email }}"
+                        required>
+                </div>
+
+                {% if user.s_admin and users.id != 1 %}
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="is_admin" name="is_admin"
+                        {% if users.is_admin %}checked{% endif %}>
+                    <label class="form-check-label" for="is_admin">Make Admin</label>
+                </div>
+                {% elif users.id == 1 %}
+                <div class="alert alert-info">
+                    Cannot change Super Admin role.
+                </div>
+                {% endif %}
+
+                <button type="submit" class="btn btn-success">Save Changes</button>
+                <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
